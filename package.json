@@ -1,13 +1,13 @@
 {
   "name": "vue2-flexi-data-table",
-  "version": "1.0.0",
-  "types": "./dist/index.d.ts",
-  "main": "./dist/vue3-flexi-data-table.umd.cjs",
-  "module": "./dist/vue3-flexi-data-table.js",
+  "version": "0.0.2",
+  "author": "tanmv",
+  "main": "./dist/vue2-flexi-data-table.umd.js",
+  "module": "./dist/vue2-flexi-data-table.es.js",
   "exports": {
     ".": {
-      "import": "./dist/vue3-flexi-data-table.js",
-      "require": "./dist/vue3-flexi-data-table.umd.cjs"
+      "import": "./dist/vue2-flexi-data-table.es.js",
+      "require": "./dist/vue2-flexi-data-table.umd.js"
     },
     "./components/TableEditor": "./src/components/TableEditor.vue",
     "./style.css": "./dist/style.css"
@@ -21,6 +21,13 @@
     "build": "vite build",
     "serve": "vite preview"
   },
+  "keywords": [
+    "vue",
+    "vue2",
+    "dynamic table",
+    "flexi data",
+    "flexi table"
+  ],
   "dependencies": {
     "escape-html": "^1.0.3",
     "vue": "^2.7.14",

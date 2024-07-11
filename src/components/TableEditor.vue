@@ -22,7 +22,7 @@
               <div class="align-items-center">
                 <span class="handle">☰</span>
 
-                <Popper placement="right-start" arrow class="popper-wrapper">
+                <!--<Popper placement="right-start" arrow class="popper-wrapper">
                   <button class="btn-more" :disabled="disabled">⋯</button>
                   <template #content>
                     <div class="popover-action">
@@ -60,7 +60,55 @@
                       </div>
                     </div>
                   </template>
-                </Popper>
+                </Popper>-->
+
+                <popper
+                  trigger="clickToOpen"
+                  :options="{
+                    placement: 'right-start',
+                    modifiers: { offset: { offset: '0,10px' } }
+                  }">
+                  <div class="popper">
+                    <div class="popover-action">
+                      <div>
+                        <button class="btn-more" :class="{active: (element.align || 'left') === 'left'}" @click="setAlign(element, 'left')">
+                          <img :src="AlignLeftIcon" />
+                        </button>
+                        <button class="btn-more" :class="{active: element.align === 'center'}" @click="setAlign(element, 'center')">
+                          <img :src="AlignCenterIcon" />
+                        </button>
+                        <button class="btn-more" :class="{active: element.align === 'right'}" @click="setAlign(element, 'right')">
+                          <img :src="AlignRightIcon" />
+                        </button>
+                      </div>
+                      <div style="margin-top: 4px">
+                        <button class="btn-more" :class="{active: (element.vAlign || 'top') === 'top'}" @click="setValign(element, 'top')">
+                          <img :src="VerticalAlignTopIcon" />
+                        </button>
+                        <button class="btn-more" :class="{active: element.vAlign === 'middle'}" @click="setValign(element, 'middle')">
+                          <img :src="VerticalAlignCenterIcon" />
+                        </button>
+                        <button class="btn-more" :class="{active: element.vAlign === 'bottom'}" @click="setValign(element, 'bottom')">
+                          <img :src="VerticalAlignBottomIcon" />
+                        </button>
+                      </div>
+
+                      <div style="margin-top: 4px" class="div-input">
+                        <label class="label">width:</label> <input type="text" v-model="element.width" placeholder="# px | %"/>
+                      </div>
+                      <div style="margin-top: 4px" class="div-input">
+                        <label class="label">min-width:</label> <input type="text" v-model="element.minWidth" placeholder="# px | %"/>
+                      </div>
+                      <div style="margin-top: 4px" class="div-input">
+                        <label class="label">max-width:</label> <input type="text" v-model="element.maxWidth" placeholder="# px | %"/>
+                      </div>
+                    </div>
+                  </div>
+              
+                  <button slot="reference" class="btn-more">
+                    ...
+                  </button>
+                </popper>
                 
                 <input :disabled="disabled" class="input-title" type="text" v-model="element.title" placeholder="Column name"/>
               </div>
@@ -179,6 +227,12 @@ export default {
       activeIndex: -1,
       VfType,
       symbols,
+      AlignLeftIcon,
+      AlignCenterIcon,
+      AlignRightIcon,
+      VerticalAlignTopIcon,
+      VerticalAlignCenterIcon,
+      VerticalAlignBottomIcon,
     };
   },
 
@@ -292,6 +346,20 @@ export default {
         this.$emit('error', 'Hãy chọn column để thêm');
       }
     },
+
+    setAlign(element, value) {
+      element.align = value;
+      this.$nextTick(() => {
+        // this.$emit('input', values);
+      });
+    },
+
+    setValign(element, value) {
+      element.vAlign = value;
+      this.$nextTick(() => {
+        // this.$emit('input', values);
+      });
+    }
   },
 };
 </script>
